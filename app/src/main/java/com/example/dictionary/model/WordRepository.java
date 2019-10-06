@@ -3,6 +3,7 @@ package com.example.dictionary.model;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.CursorWrapper;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.dictionary.database.WordDBSchema;
@@ -30,34 +31,29 @@ public class WordRepository {
         return ourInstance;
     }
 
-    private Cursor queryWord(String where, String[] whereArgs) {
-        return mDatabase.query(WordDBSchema.Word.NAME,
+    private WordCursorWrapper queryWord(String where, String[] whereArgs) {
+        Cursor cursor= mDatabase.query(WordDBSchema.Word.NAME,
                 null,
                 where,
                 whereArgs,
                 null,
                 null,
                 null);
+        return new WordCursorWrapper(cursor);
     }
 
     public List<Word> getWords() {
         List<Word> wordList = new ArrayList<>();
 
-        Cursor cursor = queryWord(null, null);
+        WordCursorWrapper cursor = queryWord(null, null);
 
         try {
             cursor.moveToFirst();
 
             while (!cursor.isAfterLast()) {
-                String strUUID = cursor.getString(cursor.getColumnIndex(WordDBSchema.Word.Cols.UUID));
-                String englishLanguage = cursor.getString(cursor.getColumnIndex(WordDBSchema.Word.Cols.ENGLISHNAME));
-                String persianLanguage = cursor.getString(cursor.getColumnIndex(WordDBSchema.Word.Cols.PERSIANNAME));
 
-                Word word = new Word(UUID.fromString(strUUID));
-                word.setEnglishNAME(englishLanguage);
-                word.setPersianNAME(persianLanguage);
 
-                wordList.add(word);
+                wordList.add(cursor.getWord());
 
                 cursor.moveToNext();
             }
@@ -72,7 +68,7 @@ public class WordRepository {
 
     public Word getWord(UUID uuid) {
         String[] whereArgs = new String[]{uuid.toString()};
-        Cursor cursor = queryWord(WordDBSchema.Word.Cols.UUID + " = ?", whereArgs);
+        WordCursorWrapper cursor = queryWord(WordDBSchema.Word.Cols.UUID + " = ?", whereArgs);
 
         try {
             if (cursor == null || cursor.getCount() == 0)
@@ -80,16 +76,8 @@ public class WordRepository {
 
             cursor.moveToFirst();
 
-            String strUUID = cursor.getString(cursor.getColumnIndex(WordDBSchema.Word.Cols.UUID));
-            String englishLanguage = cursor.getString(cursor.getColumnIndex(WordDBSchema.Word.Cols.ENGLISHNAME));
-            String persianLanguage = cursor.getString(cursor.getColumnIndex(WordDBSchema.Word.Cols.PERSIANNAME));
 
-            Word word = new Word(UUID.fromString(strUUID));
-            word.setEnglishNAME(englishLanguage);
-            word.setPersianNAME(persianLanguage);
-
-
-            return word;
+            return cursor.getWord();
 
         } finally {
             cursor.close();

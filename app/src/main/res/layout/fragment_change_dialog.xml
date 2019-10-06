@@ -7,9 +7,21 @@
     tools:context=".fragments.ChangeDialogFragment">
 
     <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="40dp"
+        android:text="Edit Word"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/shape3"/>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
@@ -18,7 +30,7 @@
             android:textSize="30dp"/>
         <EditText
             android:id="@+id/change_dialog_english_edittext"
-            android:layout_width="270dp"
+            android:layout_width="240dp"
             android:layout_marginLeft="20dp"
             android:layout_height="wrap_content"
 
@@ -38,7 +50,7 @@
             android:textSize="30dp"/>
         <EditText
             android:id="@+id/change_dialog_persian_edittext"
-            android:layout_width="270dp"
+            android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             />
@@ -59,25 +71,32 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
+        android:layout_marginTop="20dp"
         >
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_margin="3dp"
+            android:background="@drawable/shape2"
             android:id="@+id/change_dialog_button_delete"
             android:text="@string/delete"
             />
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="60dp"
             android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:background="@drawable/shape2"
             android:id="@+id/change_dialog_button_edit"
             android:layout_weight="1"
             android:text="@string/edit"
             />
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_margin="3dp"
+            android:background="@drawable/shape2"
             android:id="@+id/change_dialog_button_save"
             android:text="@string/save"
             />
