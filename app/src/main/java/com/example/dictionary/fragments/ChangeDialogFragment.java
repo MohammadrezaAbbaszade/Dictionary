@@ -31,21 +31,21 @@ import java.util.UUID;
  * A simple {@link Fragment} subclass.
  */
 public class ChangeDialogFragment extends DiaLogFragment {
-    private static final String TITLE_FROM_FRAGMENTS = "com.example.dictionary.fragments.titleFromToDoFragment";
-    private static final String DISCRIPTION_FROM_FRAGMENTS = "com.example.dictionary.fragments.discriptionFromToDoFragment";
+    private static final String ENGLISH_FROM_FRAGMENTS = "com.example.dictionary.fragments.titleFromToDoFragment";
+    private static final String PERSIAN_FROM_FRAGMENTS = "com.example.dictionary.fragments.discriptionFromToDoFragment";
     private static final String ID_OF_TASKS = "com.example.dictionary.fragments.indexoffragments";
-    private EditText mTtitleEditText;
-    private EditText mDiscriptionEditText;
+    private EditText mEnglishEditText;
+    private EditText mPersianEditText;
     private Word mWord;
     private Button mSaveButton;
     private Button mEditButton;
     private Button mDeleteButton;
-    public static ChangeDialogFragment newInstance(String titleFromFragments, String discriptionFromFragments
+    public static ChangeDialogFragment newInstance(String englishNameFromFragments, String persianNameFromFragments
     ,UUID idOfTasks) {
 
         Bundle args = new Bundle();
-        args.putString(TITLE_FROM_FRAGMENTS, titleFromFragments);
-        args.putString(DISCRIPTION_FROM_FRAGMENTS, discriptionFromFragments);
+        args.putString(ENGLISH_FROM_FRAGMENTS, englishNameFromFragments);
+        args.putString(PERSIAN_FROM_FRAGMENTS, persianNameFromFragments);
         args.putSerializable(ID_OF_TASKS, idOfTasks);
         ChangeDialogFragment fragment = new ChangeDialogFragment();
         fragment.setArguments(args);
@@ -60,10 +60,10 @@ public class ChangeDialogFragment extends DiaLogFragment {
         super.onResume();
         UUID idOfTasks = (UUID) getArguments().getSerializable(ID_OF_TASKS);
            mWord = WordRepository.getInstance(getContext()).getWord(idOfTasks);
-        mTtitleEditText.setText(getArguments().getString(TITLE_FROM_FRAGMENTS));
-        mDiscriptionEditText.setText(getArguments().getString(DISCRIPTION_FROM_FRAGMENTS));
-        mTtitleEditText.setEnabled(false);
-        mDiscriptionEditText.setEnabled(false);
+        mEnglishEditText.setText(getArguments().getString(ENGLISH_FROM_FRAGMENTS));
+        mPersianEditText.setText(getArguments().getString(PERSIAN_FROM_FRAGMENTS));
+        mEnglishEditText.setEnabled(false);
+        mPersianEditText.setEnabled(false);
     }
 
     @NonNull
@@ -75,7 +75,7 @@ public class ChangeDialogFragment extends DiaLogFragment {
         alertDialog = new AlertDialog.Builder(getActivity())
                 .setView(view)
                 .create();
-        mTtitleEditText.addTextChangedListener(new TextWatcher() {
+        mEnglishEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -83,7 +83,7 @@ public class ChangeDialogFragment extends DiaLogFragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                mWord.setNAME(charSequence.toString());
+                mWord.setEnglishNAME(charSequence.toString());
             }
 
             @Override
@@ -91,7 +91,7 @@ public class ChangeDialogFragment extends DiaLogFragment {
 
             }
         });
-        mDiscriptionEditText.addTextChangedListener(new TextWatcher() {
+        mPersianEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -99,7 +99,7 @@ public class ChangeDialogFragment extends DiaLogFragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                mWord.setDiscription(charSequence.toString());
+                mWord.setPersianNAME(charSequence.toString());
             }
 
             @Override
@@ -110,16 +110,16 @@ public class ChangeDialogFragment extends DiaLogFragment {
         mEditButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mTtitleEditText.setEnabled(true);
-                mDiscriptionEditText.setEnabled(true);
+                mEnglishEditText.setEnabled(true);
+               mPersianEditText.setEnabled(true);
             }
         });
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String titleEditText = mTtitleEditText.getText().toString();
-                String discriptionEditText = mDiscriptionEditText.getText().toString();
-                if (titleEditText.equals("") || discriptionEditText.equals("")) {
+                String englishEditText = mEnglishEditText.getText().toString();
+                String persianEditText =mPersianEditText.getText().toString();
+                if (englishEditText.equals("") || persianEditText.equals("")) {
                     Toast.makeText(getActivity(), "You Must Complete Eeach Field!", Toast.LENGTH_LONG).show();
                 } else {
                     setObjectsOfFragments();
@@ -144,8 +144,8 @@ public class ChangeDialogFragment extends DiaLogFragment {
     }
 
     private void init(View view) {
-        mTtitleEditText = view.findViewById(R.id.change_dialog_title);
-        mDiscriptionEditText = view.findViewById(R.id.change_dialog_discription);
+       mEnglishEditText = view.findViewById(R.id.change_dialog_english_edittext);
+        mPersianEditText = view.findViewById(R.id.change_dialog_persian_edittext);
         mSaveButton = view.findViewById(R.id.change_dialog_button_save);
         mEditButton = view.findViewById(R.id.change_dialog_button_edit);
         mDeleteButton = view.findViewById(R.id.change_dialog_button_delete);

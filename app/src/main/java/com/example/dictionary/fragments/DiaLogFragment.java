@@ -26,8 +26,8 @@ import com.example.dictionary.R;
  * A simple {@link Fragment} subclass.
  */
 public class DiaLogFragment extends DialogFragment {
-    private EditText mNameEditText;
-    private EditText mDiscriptionEditText;
+    private EditText mEnglishEditText;
+    private EditText mPersionEditText;
     private static final String TITLE_AND_DISCRIPTION = "com.example.dictionary.fragments.title and discription";
     public static DiaLogFragment newInstance() {
         
@@ -54,15 +54,14 @@ public class DiaLogFragment extends DialogFragment {
                 .setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        String nameEditText = mNameEditText.getText().toString();
-                        String discriptionEditText = mDiscriptionEditText.getText().toString();
-                        if (nameEditText.equals("") || discriptionEditText.equals("")) {
+                        String englishEditText = mEnglishEditText.getText().toString();
+                        String persianEditText = mPersionEditText.getText().toString();
+                        if (persianEditText.equals("") || englishEditText.equals("")) {
                             Toast.makeText(getActivity(), "You Must Complete Eeach Field!", Toast.LENGTH_LONG).show();
                         } else {
-                            String[] forExtra = {nameEditText, discriptionEditText};
-                            if (!nameEditText.equals("") && !discriptionEditText.equals("")) {
+                            String[] forExtra = {englishEditText, persianEditText};
                                 sendResult(forExtra);
-                            }
+
                         }
                     }
                 })
@@ -77,8 +76,8 @@ public class DiaLogFragment extends DialogFragment {
 
     }
     private void init(View view) {
-        mNameEditText = view.findViewById(R.id.dialog_title);
-        mDiscriptionEditText = view.findViewById(R.id.dialog_discription);
+        mEnglishEditText = view.findViewById(R.id.dialog_english_edittext);
+        mPersionEditText = view.findViewById(R.id.dialog_persian_edittext);
     }
     private void sendResult(String[] forExtra) {
         Fragment fragment = getTargetFragment();

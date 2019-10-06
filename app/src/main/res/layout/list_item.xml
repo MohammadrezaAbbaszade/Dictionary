@@ -19,12 +19,6 @@
             android:textSize="30sp" />
 
         <TextView
-            android:id="@+id/item_discription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
-
-        <TextView
             android:id="@+id/item_shape_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,10 +29,10 @@
             android:background="@drawable/shape1" />
 
         <TextView
-            android:id="@+id/item_date"
+            android:id="@+id/item_persian"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center|bottom" />
+            android:layout_gravity="center" />
 
     </FrameLayout>
 </androidx.cardview.widget.CardView>

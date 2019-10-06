@@ -104,20 +104,20 @@ public class MainFragment extends Fragment {
     }
     private class WordHolder extends RecyclerView.ViewHolder {
         private TextView mItemTitleTextView;
-        private TextView mItemDiscriptionTextView;
         private TextView mItemShapeTextView;
+        private TextView mItemPersianTextView;
         private Word mWord;
 
         public WordHolder(@NonNull View itemView) {
             super(itemView);
             mItemTitleTextView = itemView.findViewById(R.id.item_title);
-            mItemDiscriptionTextView = itemView.findViewById(R.id.item_discription);
             mItemShapeTextView = itemView.findViewById(R.id.item_shape_text);
+            mItemPersianTextView=itemView.findViewById(R.id.item_persian);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ChangeDialogFragment changeDialogFragment = ChangeDialogFragment.newInstance(mWord.getNAME()
-                            , mWord.getDiscription(),mWord.getUUID());
+                    ChangeDialogFragment changeDialogFragment = ChangeDialogFragment.newInstance(
+                             mWord.getEnglishNAME(),mWord.getPersianNAME(),mWord.getUUID());
                     changeDialogFragment.setTargetFragment(MainFragment.this, REQUEST_CODE_FOR_CHANGE_FRAGMENT);
                     changeDialogFragment.show(getFragmentManager(), CHANGE_DIALOG_FRAGMENT_TAG);
 
@@ -126,10 +126,10 @@ public class MainFragment extends Fragment {
         }
 
         public void bind(Word word) {
-            Character shapeText = word.getNAME().charAt(0);
+            Character shapeText = word.getEnglishNAME().charAt(0);
             String stringForShapeText = shapeText.toString();
-            mItemTitleTextView.setText(word.getNAME());
-            mItemDiscriptionTextView.setText(word.getDiscription());
+            mItemPersianTextView.setText(word.getPersianNAME());
+            mItemTitleTextView.setText(word.getEnglishNAME());
             mItemShapeTextView.setText(stringForShapeText);
             mWord = word;
         }
@@ -182,8 +182,8 @@ public class MainFragment extends Fragment {
     private void setToDoClass(String[] valueFromDiaLogFragment) {
        mWord = new Word();
         if (valueFromDiaLogFragment != null) {
-            mWord.setNAME(valueFromDiaLogFragment[0]);
-            mWord.setDiscription(valueFromDiaLogFragment[1]);
+            mWord.setEnglishNAME(valueFromDiaLogFragment[0]);
+            mWord.setPersianNAME(valueFromDiaLogFragment[1]);
         }
         WordRepository.getInstance(getContext()).insertWord(mWord);
         creatRecycler();

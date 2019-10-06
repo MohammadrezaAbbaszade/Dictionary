@@ -4,8 +4,8 @@ import java.util.UUID;
 
 public class Word {
     private UUID mUUID;
-    private String mNAME;
-    private String mLanguage;
+    private String mEnglishNAME;
+    private String mPersianNAME;
     public Word() {
         this(UUID.randomUUID());
     }
@@ -14,20 +14,20 @@ public class Word {
         mUUID = uuid;
     }
 
-    public String getNAME() {
-        return mNAME;
+    public String getEnglishNAME() {
+        return mEnglishNAME;
     }
 
-    public void setNAME(String NAME) {
-        mNAME = NAME;
+    public void setEnglishNAME(String englishNAME) {
+        mEnglishNAME = englishNAME;
     }
 
-    public String getLanguage() {
-        return mLanguage;
+    public String getPersianNAME() {
+        return mPersianNAME;
     }
 
-    public void setLanguage(String language) {
-        mLanguage = language;
+    public void setPersianNAME(String persianNAME) {
+        mPersianNAME = persianNAME;
     }
 
     public UUID getUUID() {

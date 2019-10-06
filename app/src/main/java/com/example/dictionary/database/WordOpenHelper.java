@@ -17,8 +17,8 @@ public class WordOpenHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("CREATE TABLE " +  WordDBSchema.Word.NAME + "(" +
                 WordDBSchema.Word.Cols._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 WordDBSchema.Word.Cols.UUID + "," +
-                WordDBSchema.Word.Cols.NAME + "," +
-                WordDBSchema.Word.Cols.LANGUAGE +
+                WordDBSchema.Word.Cols.ENGLISHNAME + "," +
+                WordDBSchema.Word.Cols.PERSIANNAME +
                 ");");
     }
 

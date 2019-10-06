@@ -50,13 +50,13 @@ public class WordRepository {
 
             while (!cursor.isAfterLast()) {
                 String strUUID = cursor.getString(cursor.getColumnIndex(WordDBSchema.Word.Cols.UUID));
-                String name = cursor.getString(cursor.getColumnIndex(WordDBSchema.Word.Cols.NAME));
-                String language = cursor.getString(cursor.getColumnIndex(WordDBSchema.Word.Cols.LANGUAGE));
-
+                String englishLanguage = cursor.getString(cursor.getColumnIndex(WordDBSchema.Word.Cols.ENGLISHNAME));
+                String persianLanguage = cursor.getString(cursor.getColumnIndex(WordDBSchema.Word.Cols.PERSIANNAME));
 
                 Word word = new Word(UUID.fromString(strUUID));
-                word.setLanguage(language);
-                word.setNAME(name);
+                word.setEnglishNAME(englishLanguage);
+                word.setPersianNAME(persianLanguage);
+
                 wordList.add(word);
 
                 cursor.moveToNext();
@@ -81,12 +81,12 @@ public class WordRepository {
             cursor.moveToFirst();
 
             String strUUID = cursor.getString(cursor.getColumnIndex(WordDBSchema.Word.Cols.UUID));
-            String name = cursor.getString(cursor.getColumnIndex(WordDBSchema.Word.Cols.NAME));
-            String language = cursor.getString(cursor.getColumnIndex(WordDBSchema.Word.Cols.LANGUAGE));
+            String englishLanguage = cursor.getString(cursor.getColumnIndex(WordDBSchema.Word.Cols.ENGLISHNAME));
+            String persianLanguage = cursor.getString(cursor.getColumnIndex(WordDBSchema.Word.Cols.PERSIANNAME));
 
             Word word = new Word(UUID.fromString(strUUID));
-            word.setLanguage(language);
-            word.setNAME(name);
+            word.setEnglishNAME(englishLanguage);
+            word.setPersianNAME(persianLanguage);
 
 
             return word;
@@ -120,8 +120,8 @@ public class WordRepository {
     private ContentValues getContentValues(Word word) {
         ContentValues values = new ContentValues();
         values.put(WordDBSchema.Word.Cols.UUID, word.getUUID().toString());
-        values.put(WordDBSchema.Word.Cols.LANGUAGE, word.getLanguage());
-        values.put(WordDBSchema.Word.Cols.NAME, word.getNAME());
+        values.put(WordDBSchema.Word.Cols.ENGLISHNAME, word.getEnglishNAME());
+        values.put(WordDBSchema.Word.Cols.PERSIANNAME, word.getPersianNAME());
 
         return values;
     }
