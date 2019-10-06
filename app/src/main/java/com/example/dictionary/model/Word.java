@@ -5,7 +5,7 @@ import java.util.UUID;
 public class Word {
     private UUID mUUID;
     private String mNAME;
-    private String mDiscription;
+    private String mLanguage;
     public Word() {
         this(UUID.randomUUID());
     }
@@ -22,12 +22,12 @@ public class Word {
         mNAME = NAME;
     }
 
-    public String getDiscription() {
-        return mDiscription;
+    public String getLanguage() {
+        return mLanguage;
     }
 
-    public void setDiscription(String discription) {
-        mDiscription = discription;
+    public void setLanguage(String language) {
+        mLanguage = language;
     }
 
     public UUID getUUID() {

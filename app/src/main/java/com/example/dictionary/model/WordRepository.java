@@ -51,11 +51,11 @@ public class WordRepository {
             while (!cursor.isAfterLast()) {
                 String strUUID = cursor.getString(cursor.getColumnIndex(WordDBSchema.Word.Cols.UUID));
                 String name = cursor.getString(cursor.getColumnIndex(WordDBSchema.Word.Cols.NAME));
-                String discription = cursor.getString(cursor.getColumnIndex(WordDBSchema.Word.Cols.DISCRIPTION));
+                String language = cursor.getString(cursor.getColumnIndex(WordDBSchema.Word.Cols.LANGUAGE));
 
 
                 Word word = new Word(UUID.fromString(strUUID));
-                word.setDiscription(discription);
+                word.setLanguage(language);
                 word.setNAME(name);
                 wordList.add(word);
 
@@ -82,10 +82,10 @@ public class WordRepository {
 
             String strUUID = cursor.getString(cursor.getColumnIndex(WordDBSchema.Word.Cols.UUID));
             String name = cursor.getString(cursor.getColumnIndex(WordDBSchema.Word.Cols.NAME));
-            String discription = cursor.getString(cursor.getColumnIndex(WordDBSchema.Word.Cols.DISCRIPTION));
+            String language = cursor.getString(cursor.getColumnIndex(WordDBSchema.Word.Cols.LANGUAGE));
 
             Word word = new Word(UUID.fromString(strUUID));
-            word.setDiscription(discription);
+            word.setLanguage(language);
             word.setNAME(name);
 
 
@@ -120,7 +120,7 @@ public class WordRepository {
     private ContentValues getContentValues(Word word) {
         ContentValues values = new ContentValues();
         values.put(WordDBSchema.Word.Cols.UUID, word.getUUID().toString());
-        values.put(WordDBSchema.Word.Cols.DISCRIPTION, word.getDiscription());
+        values.put(WordDBSchema.Word.Cols.LANGUAGE, word.getLanguage());
         values.put(WordDBSchema.Word.Cols.NAME, word.getNAME());
 
         return values;

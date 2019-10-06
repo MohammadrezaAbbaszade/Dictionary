@@ -18,7 +18,7 @@ public class WordOpenHelper extends SQLiteOpenHelper {
                 WordDBSchema.Word.Cols._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 WordDBSchema.Word.Cols.UUID + "," +
                 WordDBSchema.Word.Cols.NAME + "," +
-                WordDBSchema.Word.Cols.DISCRIPTION +
+                WordDBSchema.Word.Cols.LANGUAGE +
                 ");");
     }
 

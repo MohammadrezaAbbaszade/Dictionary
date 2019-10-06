@@ -11,7 +11,7 @@ public class WordDBSchema {
             public static final String _ID = "_id";
             public static final String UUID = "uuid";
             public static final String NAME = "name";
-            public static final String DISCRIPTION = "discription";
+            public static final String LANGUAGE = "language";
         }
     }
 }
