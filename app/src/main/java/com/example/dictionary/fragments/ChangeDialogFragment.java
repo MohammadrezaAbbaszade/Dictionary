@@ -19,12 +19,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.dictionary.R;
 import com.example.dictionary.model.Word;
 import com.example.dictionary.model.WordRepository;
 
+import java.text.SimpleDateFormat;
 import java.util.UUID;
 
 /**
@@ -36,6 +38,7 @@ public class ChangeDialogFragment extends DiaLogFragment {
     private static final String ID_OF_TASKS = "com.example.dictionary.fragments.indexoffragments";
     private EditText mEnglishEditText;
     private EditText mPersianEditText;
+    private ImageButton mShare;
     private Word mWord;
     private Button mSaveButton;
     private Button mEditButton;
@@ -75,6 +78,18 @@ public class ChangeDialogFragment extends DiaLogFragment {
         alertDialog = new AlertDialog.Builder(getActivity())
                 .setView(view)
                 .create();
+        mShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_TEXT,getWordReport());
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Dictionary Word Detail");
+                intent = Intent.createChooser(intent, "Sent Word Detail via");
+
+                startActivity(intent);
+            }
+        });
         mEnglishEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -144,6 +159,7 @@ public class ChangeDialogFragment extends DiaLogFragment {
     }
 
     private void init(View view) {
+        mShare=view.findViewById(R.id.share_button_change_dialog);
        mEnglishEditText = view.findViewById(R.id.change_dialog_english_edittext);
         mPersianEditText = view.findViewById(R.id.change_dialog_persian_edittext);
         mSaveButton = view.findViewById(R.id.change_dialog_button_save);
@@ -170,5 +186,11 @@ public class ChangeDialogFragment extends DiaLogFragment {
            WordRepository.getInstance(getContext()).updateWord(mWord);
         } catch (Exception e) {
         }
+    }
+    private String getWordReport() {
+        String englishString =mWord.getEnglishNAME();
+        String persianString = mWord.getPersianNAME();
+
+        return String.format("English Meaning:"+" "+"%n"+"Persian Meaning:%s"+" ",englishString,persianString);
     }
 }
