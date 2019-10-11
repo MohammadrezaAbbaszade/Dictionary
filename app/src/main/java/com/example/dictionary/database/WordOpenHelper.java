@@ -6,24 +6,22 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-public class WordOpenHelper extends SQLiteOpenHelper {
-    public static final int VERSION = 1;
-    public WordOpenHelper(@Nullable Context context) {
-        super(context, WordDBSchema.NAME, null, VERSION);
+import com.example.dictionary.model.DaoMaster;
+
+import org.greenrobot.greendao.database.Database;
+
+public class WordOpenHelper extends DaoMaster.DevOpenHelper {
+
+    public WordOpenHelper(Context context, String name) {
+        super(context, name);
+    }
+
+    public WordOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory) {
+        super(context, name, factory);
     }
 
     @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("CREATE TABLE " +  WordDBSchema.Word.NAME + "(" +
-                WordDBSchema.Word.Cols._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                WordDBSchema.Word.Cols.UUID + "," +
-                WordDBSchema.Word.Cols.ENGLISHNAME + "," +
-                WordDBSchema.Word.Cols.PERSIANNAME +
-                ");");
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
+    public void onUpgrade(Database db, int oldVersion, int newVersion) {
+        super.onUpgrade(db, oldVersion, newVersion);
     }
 }
