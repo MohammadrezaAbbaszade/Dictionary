@@ -183,7 +183,7 @@ public class MainFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     ChangeDialogFragment changeDialogFragment = ChangeDialogFragment.newInstance(
-                            mWord.getEnglishNAME(), mWord.getPersianNAME(), mWord.getUUID());
+                            mWord.getMEnglishNAME(), mWord.getMPersianNAME(), mWord.getMUUID());
                     changeDialogFragment.setTargetFragment(MainFragment.this, REQUEST_CODE_FOR_CHANGE_FRAGMENT);
                     changeDialogFragment.show(getFragmentManager(), CHANGE_DIALOG_FRAGMENT_TAG);
 
@@ -192,10 +192,10 @@ public class MainFragment extends Fragment {
         }
 
         public void bind(Word word) {
-            Character shapeText = word.getEnglishNAME().charAt(0);
+            Character shapeText = word.getMEnglishNAME().charAt(0);
             String stringForShapeText = shapeText.toString();
-            mItemPersianTextView.setText(word.getPersianNAME());
-            mItemTitleTextView.setText(word.getEnglishNAME());
+            mItemPersianTextView.setText(word.getMPersianNAME());
+            mItemTitleTextView.setText(word.getMEnglishNAME());
             mItemShapeTextView.setText(stringForShapeText);
             mWord = word;
         }
@@ -246,7 +246,7 @@ public class MainFragment extends Fragment {
 
                             // name match condition. this might differ depending on your requirement
                             // here we are looking for name or phone number match
-                            if (row.getEnglishNAME().toLowerCase().contains(charString.toLowerCase()) || row.getPersianNAME().contains(charSequence)) {
+                            if (row.getMEnglishNAME().toLowerCase().contains(charString.toLowerCase()) || row.getMPersianNAME().contains(charSequence)) {
                                 filteredList.add(row);
                             }
                         }
@@ -288,16 +288,16 @@ public class MainFragment extends Fragment {
     private void setToDoClass(String[] valueFromDiaLogFragment) {
         mWord = new Word();
         if (valueFromDiaLogFragment != null) {
-            mWord.setEnglishNAME(valueFromDiaLogFragment[0]);
-            mWord.setPersianNAME(valueFromDiaLogFragment[1]);
+            mWord.setMEnglishNAME(valueFromDiaLogFragment[0]);
+            mWord.setMPersianNAME(valueFromDiaLogFragment[1]);
         }
-        WordRepository.getInstance(getContext()).insertWord(mWord);
+        WordRepository.getInstance().insertWord(mWord);
         updateSubtitle();
         creatRecycler();
     }
 
     private void updateSubtitle() {
-        int wordSize = WordRepository.getInstance(getContext()).getWords().size();
+        int wordSize = WordRepository.getInstance().getWords().size();
         String subtitle = "Words:" + wordSize;
 
         AppCompatActivity activity = (AppCompatActivity) getActivity();
@@ -307,7 +307,7 @@ public class MainFragment extends Fragment {
     }
 
     private void creatRecycler() {
-        mWordList = WordRepository.getInstance(getContext()).getWords();
+        mWordList = WordRepository.getInstance().getWords();
         if(mWordList.size()==0)
         {
             mBackgroundImageView.setVisibility(View.VISIBLE);
@@ -326,8 +326,8 @@ public class MainFragment extends Fragment {
         dlgAlert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 try {
-                    List<Word> mToDoList = WordRepository.getInstance(getContext()).getWords();
-                    WordRepository.getInstance(getContext()).deleteWords(mToDoList);
+                    List<Word> mToDoList = WordRepository.getInstance().getWords();
+                    WordRepository.getInstance().deleteWords(mToDoList);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

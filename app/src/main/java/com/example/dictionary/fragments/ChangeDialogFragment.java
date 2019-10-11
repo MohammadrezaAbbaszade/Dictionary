@@ -44,12 +44,12 @@ public class ChangeDialogFragment extends DiaLogFragment {
     private Button mEditButton;
     private Button mDeleteButton;
     public static ChangeDialogFragment newInstance(String englishNameFromFragments, String persianNameFromFragments
-    ,UUID idOfTasks) {
+    ,Long idOfTasks) {
 
         Bundle args = new Bundle();
         args.putString(ENGLISH_FROM_FRAGMENTS, englishNameFromFragments);
         args.putString(PERSIAN_FROM_FRAGMENTS, persianNameFromFragments);
-        args.putSerializable(ID_OF_TASKS, idOfTasks);
+        args.putLong(ID_OF_TASKS, idOfTasks);
         ChangeDialogFragment fragment = new ChangeDialogFragment();
         fragment.setArguments(args);
         return fragment;
@@ -61,8 +61,8 @@ public class ChangeDialogFragment extends DiaLogFragment {
     @Override
     public void onResume() {
         super.onResume();
-        UUID idOfTasks = (UUID) getArguments().getSerializable(ID_OF_TASKS);
-           mWord = WordRepository.getInstance(getContext()).getWord(idOfTasks);
+        Long idOfTasks =  getArguments().getLong(ID_OF_TASKS);
+           mWord = WordRepository.getInstance().getWord(idOfTasks);
         mEnglishEditText.setText(getArguments().getString(ENGLISH_FROM_FRAGMENTS));
         mPersianEditText.setText(getArguments().getString(PERSIAN_FROM_FRAGMENTS));
         mEnglishEditText.setEnabled(false);
@@ -98,7 +98,7 @@ public class ChangeDialogFragment extends DiaLogFragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                mWord.setEnglishNAME(charSequence.toString());
+                mWord.setMEnglishNAME(charSequence.toString());
             }
 
             @Override
@@ -114,7 +114,7 @@ public class ChangeDialogFragment extends DiaLogFragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                mWord.setPersianNAME(charSequence.toString());
+                mWord.setMPersianNAME(charSequence.toString());
             }
 
             @Override
@@ -175,7 +175,7 @@ public class ChangeDialogFragment extends DiaLogFragment {
 
     private void deleteReposiory() {
                 try {
-                WordRepository.getInstance(getContext()).deleteWord(mWord);
+                WordRepository.getInstance().deleteWord(mWord);
             } catch (Exception e) {
             }
     }
@@ -183,13 +183,13 @@ public class ChangeDialogFragment extends DiaLogFragment {
     private void updateReposiory() {
 
         try {
-           WordRepository.getInstance(getContext()).updateWord(mWord);
+           WordRepository.getInstance().updateWord(mWord);
         } catch (Exception e) {
         }
     }
     private String getWordReport() {
-        String englishString =mWord.getEnglishNAME();
-        String persianString = mWord.getPersianNAME();
+        String englishString =mWord.getMEnglishNAME();
+        String persianString = mWord.getMPersianNAME();
 
         return String.format("English Meaning:"+" "+"%n"+"Persian Meaning:%s"+" ",englishString,persianString);
     }
