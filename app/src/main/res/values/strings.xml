@@ -22,4 +22,5 @@
     <string name="username">UserName</string>
     <string name="ok">Ok</string>
     <string name="cancle">Cancel</string>
+    <string name="subtitle_format">Words</string>
 </resources>

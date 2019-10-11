@@ -104,7 +104,14 @@ public class WordRepository {
         String[] whereArgs = new String[]{word.getUUID().toString()};
         mDatabase.delete(WordDBSchema.Word.NAME, where, whereArgs);
     }
-
+    public void deleteWords(List<Word> wordList) throws Exception {
+        for (Word w : wordList) {
+            Word w2 = getWord(w.getUUID());
+            if (w2 == null)
+                throw new Exception("You Dont Have Any Tasks  To Delete!!!");
+            deleteWord(w2);
+        }
+    }
     private ContentValues getContentValues(Word word) {
         ContentValues values = new ContentValues();
         values.put(WordDBSchema.Word.Cols.UUID, word.getUUID().toString());

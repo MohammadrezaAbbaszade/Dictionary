@@ -7,5 +7,10 @@
         android:icon="@drawable/ic_search_black_24dp"
         android:title="Search"
         app:actionViewClass="android.widget.SearchView"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/delete_menu"
+        android:icon="@drawable/ic_action_name"
+        android:title="Delete"
         app:showAsAction="ifRoom|withText" />
 </menu>

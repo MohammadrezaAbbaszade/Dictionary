@@ -1,25 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.MainFragment">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:id="@+id/background_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/ic_dictionary"
+        android:visibility="gone" />
+
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/main_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/main_recycler"/>
+        android:scrollbars="vertical" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/main_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:fabCustomSize="80dp"
+        android:layout_gravity="bottom"
         android:layout_marginLeft="290dp"
         android:layout_marginBottom="20dp"
-        android:layout_gravity="bottom"
         android:src="@drawable/ic_plus"
-        />
-
+        app:fabCustomSize="80dp" />
 </FrameLayout>
