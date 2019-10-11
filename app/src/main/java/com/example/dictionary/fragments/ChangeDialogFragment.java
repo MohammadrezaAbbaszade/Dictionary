@@ -191,6 +191,6 @@ public class ChangeDialogFragment extends DiaLogFragment {
         String englishString =mWord.getMEnglishNAME();
         String persianString = mWord.getMPersianNAME();
 
-        return String.format("English Meaning:"+" "+"%n"+"Persian Meaning:%s"+" ",englishString,persianString);
+        return String.format("Word Meaning:"+" "+"%n"+"English Meaning:"+" "+"%s"+"%n"+"Persian Meaning:"+" "+"%s",englishString,persianString);
     }
 }
